@@ -1,0 +1,28 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
+public class StudentList {
+    public static void main(String[] args) {
+        if (args.length == 0) {
+            System.out.println("Loading Data: 'a', 'r', or '+'.");
+            return;
+        }
+
+        if (args[0].equals("a")) {
+            System.out.println("Loading data...");
+            try (BufferedReader reader = new BufferedReader(new FileReader("students.txt"))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    String[] studentData = line.split(",");
+                    for (String data : studentData) {
+                        System.out.println(data);
+                    }
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+                System.out.println("Data Loaded.");
+            }
+        }
+    }
+}
